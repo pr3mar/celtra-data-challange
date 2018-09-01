@@ -1,0 +1,56 @@
+kumuluzee:
+  name: celtra-data-challenge
+  env:
+    name: prod
+  cors-filter:
+    servlet:
+      allow-origin: "*"
+  openapi:
+    ui:
+      enabled: true
+  server:
+#      base-url: http://35.234.130.95:8888
+      base-url: http://localhost:80
+      http:
+        port: 80
+  datasources:
+    - jndi-name: jdbc/celtra-challenge
+      connection-url: jdbc:sqlserver://localhost
+      username: admin
+      password: 123456789
+      max-pool-size: 20
+  health:
+    servlet:
+      mapping: /health
+      enabled: true
+    logs:
+      enabled: true
+      level: INFO
+      period-s: 60
+    checks:
+      data-source-health-check:
+        jndi-name: jdbc/celtra-prod
+      disk-space-health-check:
+        threshold: 100000000
+  metrics:
+    servlet:
+      enabled: true
+      mapping: /metrics
+    web-instrumentation:
+      - name: dataResource
+        url-pattern: /v1/device/*
+  logs:
+    config-file: '<?xml version="1.0" encoding="UTF-8"?>
+                  <Configuration name="celtra-prod">
+                      <Appenders>
+                          <Console name="console" target="SYSTEM_OUT">
+                              <PatternLayout pattern="%d %p %marker %m %X %ex %n"/>
+                          </Console>
+                      </Appenders>
+                      <Loggers>
+                          <!-- Default util -->
+                          <Root level="all">
+                              <AppenderRef ref="console" level="info"/>
+                          </Root>
+                      </Loggers>
+                  </Configuration>'
