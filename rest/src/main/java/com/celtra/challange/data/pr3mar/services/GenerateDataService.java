@@ -235,14 +235,11 @@ public class GenerateDataService {
             if(userId == null) {
                 return entities;
             }
-            if(campaign == null) {
-                log.info("WTF?");
-            }
             Integer interaction = chooseInteraction(interactionTypeIds);
             ImpressionEntity entity = new ImpressionEntity(
                     campaign.getId(),
                     ad.getId(),
-                    userId, // TODO: handle max 10 impressions per user!
+                    userId,
                     interaction,
                     chooseImpressionDate(campaign, from, to)
             );
