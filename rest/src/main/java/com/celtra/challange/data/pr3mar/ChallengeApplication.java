@@ -13,7 +13,7 @@ import java.util.Set;
 @ApplicationPath("v1")
 @OpenAPIDefinition(
         info = @Info(title = "Rest API", version = "v1", description = "Celtra Data Engineer REST API endpoints"),
-//        servers = @Server(url ="http://35.230.154.45:80/v1"))
+//        servers = @Server(url ="http://35.202.168.112:80/v1") //TODO: Uncomment this line for production release
         servers = @Server(url ="http://localhost:80/v1")
 )
 public class ChallengeApplication extends Application {
