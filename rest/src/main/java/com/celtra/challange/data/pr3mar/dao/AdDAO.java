@@ -4,6 +4,7 @@ import com.celtra.challange.data.pr3mar.models.entity.AdEntity;
 import com.celtra.challange.data.pr3mar.models.reports.AdSummary;
 
 import javax.enterprise.context.RequestScoped;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import java.util.Date;
 import java.util.List;
@@ -27,9 +28,13 @@ public class AdDAO extends GenericDAO<AdEntity, Long> {
     }
 
     public Long getLatestId() {
-        return em.createNamedQuery("Ad.getLastId", Long.class)
-                .setMaxResults(1)
-                .getSingleResult();
+        try {
+            return em.createNamedQuery("Ad.getLastId", Long.class)
+                    .setMaxResults(1)
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            return -1L;
+        }
     }
 
     public Long getLastNIds(int max) {

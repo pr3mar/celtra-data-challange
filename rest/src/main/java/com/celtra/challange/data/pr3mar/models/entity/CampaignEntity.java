@@ -38,6 +38,8 @@ import static javax.persistence.GenerationType.IDENTITY;
                             columns = {
                                     @ColumnResult(name = "CampaignId", type = Long.class),
                                     @ColumnResult(name = "CampaignName", type = String.class),
+                                    @ColumnResult(name = "activeFrom", type = Date.class),
+                                    @ColumnResult(name = "activeTo", type = Date.class),
                                     @ColumnResult(name = "impressions", type = Long.class),
                                     @ColumnResult(name = "uniqueUsers", type = Long.class),
                                     @ColumnResult(name = "interactions", type = Long.class),
@@ -58,6 +60,8 @@ import static javax.persistence.GenerationType.IDENTITY;
                                     @ColumnResult(name = "CampaignId", type = Long.class),
                                     @ColumnResult(name = "CampaignName", type = String.class),
                                     @ColumnResult(name = "weekDay", type = String.class),
+                                    @ColumnResult(name = "activeFrom", type = Date.class),
+                                    @ColumnResult(name = "activeTo", type = Date.class),
                                     @ColumnResult(name = "impressions", type = Long.class),
                                     @ColumnResult(name = "uniqueUsers", type = Long.class),
                                     @ColumnResult(name = "interactions", type = Long.class),

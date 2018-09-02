@@ -32,7 +32,7 @@ public class ReportCampaignResource {
 
     @GET
     @Path("/{id}/ads")
-    @Operation(summary = "Get campaign summary with ads", tags = {"Reports"},
+    @Operation(summary = "Get campaign summary with ads", tags = {"Reports", "Campaign"},
             description = "Get a summary of a campaign with given id with ad details",
             responses = {
                     @ApiResponse(
@@ -69,7 +69,7 @@ public class ReportCampaignResource {
 
     @GET
     @Path("/date/")
-    @Operation(summary = "Get all campaign summaries from time period", tags = {"Reports"},
+    @Operation(summary = "Get all campaign summaries from time period", tags = {"Reports", "Campaign"},
             description = "Get a summary of all campaigns in the database in provided time period (default = one week).",
             responses = {
                     @ApiResponse(
@@ -107,7 +107,7 @@ public class ReportCampaignResource {
 
     @GET
     @Path("/day/")
-    @Operation(summary = "Get all campaign summaries from time period", tags = {"Reports"},
+    @Operation(summary = "Get all campaign summaries from time period", tags = {"Reports", "Campaign"},
             description = "Get a summary of all campaigns in the database in provided time period (default = one week).",
             responses = {
                     @ApiResponse(
@@ -144,8 +144,154 @@ public class ReportCampaignResource {
     }
 
     @GET
+    @Path("/ongoing/")
+    @Operation(summary = "Get all campaign summaries from time period", tags = {"Reports", "Campaign"},
+            description = "Get a summary of all campaigns in the database in provided time period (default = one week).",
+            responses = {
+                    @ApiResponse(
+                            description = "Summary data transfer model",
+                            responseCode = "200",
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    array = @ArraySchema(schema = @Schema(implementation = CampaignSummary.class))
+                            )
+                    ),
+                    @ApiResponse(
+                            description = "Entity not found",
+                            responseCode = "404"
+                    ),
+                    @ApiResponse(
+                            description = "Server error",
+                            responseCode = "500"
+                    )
+            }
+    )
+    public Response getOngoingCampaignSummary(
+            @QueryParam("dateFrom") Date dateFrom,
+            @QueryParam("dateTo") Date dateTo
+    ) {
+        try {
+            List<CampaignSummary> summary = campaignDB.getOngoingCampaignReport();
+            return Response.ok(summary).build();
+        } catch (EntityNotFoundException e) {
+            return Response.status(404).entity(exceptionTransformer.transformToDTO(e, 404)).build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Response.serverError().build();
+        }
+    }
+
+    @GET
+    @Path("/ongoing/day/")
+    @Operation(summary = "Get all ongoing campaign summaries by day.", tags = {"Reports", "Campaign"},
+            description = "Get a summary of all ongoing campaigns in the database ",
+            responses = {
+                    @ApiResponse(
+                            description = "Summary data transfer model",
+                            responseCode = "200",
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    array = @ArraySchema(schema = @Schema(implementation = CampaignSummary.class))
+                            )
+                    ),
+                    @ApiResponse(
+                            description = "Entity not found",
+                            responseCode = "404"
+                    ),
+                    @ApiResponse(
+                            description = "Server error",
+                            responseCode = "500"
+                    )
+            }
+    )
+    public Response getOngoingCampaignSummaryByDay(
+            @QueryParam("dateFrom") Date dateFrom,
+            @QueryParam("dateTo") Date dateTo
+    ) {
+        try {
+            List<CampaignSummary> summary = campaignDB.getOngoingCampaignReportByDay();
+            return Response.ok(summary).build();
+        } catch (EntityNotFoundException e) {
+            return Response.status(404).entity(exceptionTransformer.transformToDTO(e, 404)).build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Response.serverError().build();
+        }
+    }
+
+    @GET
+    @Path("/finished/")
+    @Operation(summary = "Get all finished campaign summaries.", tags = {"Reports", "Campaign"},
+            description = "Get a summary of all finished campaigns in the database.",
+            responses = {
+                    @ApiResponse(
+                            description = "Summary data transfer model",
+                            responseCode = "200",
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    array = @ArraySchema(schema = @Schema(implementation = CampaignSummary.class))
+                            )
+                    ),
+                    @ApiResponse(
+                            description = "Entity not found",
+                            responseCode = "404"
+                    ),
+                    @ApiResponse(
+                            description = "Server error",
+                            responseCode = "500"
+                    )
+            }
+    )
+    public Response getFinishedCampaignSummary() {
+        try {
+            List<CampaignSummary> summary = campaignDB.getFinishedCampaignReport();
+            return Response.ok(summary).build();
+        } catch (EntityNotFoundException e) {
+            return Response.status(404).entity(exceptionTransformer.transformToDTO(e, 404)).build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Response.serverError().build();
+        }
+    }
+
+    @GET
+    @Path("/finished/day/")
+    @Operation(summary = "Get finished campaign summaries from time period", tags = {"Reports", "Campaign"},
+            description = "Get a summary of all finished campaigns in the database.",
+            responses = {
+                    @ApiResponse(
+                            description = "Summary data transfer model",
+                            responseCode = "200",
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    array = @ArraySchema(schema = @Schema(implementation = CampaignSummary.class))
+                            )
+                    ),
+                    @ApiResponse(
+                            description = "Entity not found",
+                            responseCode = "404"
+                    ),
+                    @ApiResponse(
+                            description = "Server error",
+                            responseCode = "500"
+                    )
+            }
+    )
+    public Response getFinishedCampaignSummaryByDay() {
+        try {
+            List<CampaignSummary> summary = campaignDB.getFinishedCampaignReportByDay();
+            return Response.ok(summary).build();
+        } catch (EntityNotFoundException e) {
+            return Response.status(404).entity(exceptionTransformer.transformToDTO(e, 404)).build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Response.serverError().build();
+        }
+    }
+
+    @GET
     @Path("/id/{id}/")
-    @Operation(summary = "Get campaign summary by id", tags = {"Reports"},
+    @Operation(summary = "Get campaign summary by id", tags = {"Reports", "Campaign"},
             description = "Get a summary of a campaign with a provided id",
             responses = {
                     @ApiResponse(
@@ -182,7 +328,7 @@ public class ReportCampaignResource {
 
     @GET
     @Path("/id/")
-    @Operation(summary = "Get campaign summary", tags = {"Reports"},
+    @Operation(summary = "Get campaign summary", tags = {"Reports", "Campaign"},
             description = "Get a summary of a campaign",
             responses = {
                     @ApiResponse(
@@ -219,7 +365,7 @@ public class ReportCampaignResource {
 
     @GET
     @Path("/name/{name}/")
-    @Operation(summary = "Get campaign summary by name", tags = {"Reports"},
+    @Operation(summary = "Get campaign summary by name", tags = {"Reports", "Campaign"},
             description = "Get a summary of a campaign with a provided name",
             responses = {
                     @ApiResponse(
@@ -256,7 +402,7 @@ public class ReportCampaignResource {
 
     @GET
     @Path("/name/")
-    @Operation(summary = "Get campaign summary by name list", tags = {"Reports"},
+    @Operation(summary = "Get campaign summary by name list", tags = {"Reports", "Campaign"},
             description = "Get a summary of campaigns with provided list of names",
             responses = {
                     @ApiResponse(

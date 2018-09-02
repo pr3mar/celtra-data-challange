@@ -9,14 +9,13 @@ kumuluzee:
     ui:
       enabled: true
   server:
-#      base-url: http://35.234.130.95:8888
       base-url: http://localhost:80
       http:
         port: 80
   datasources:
     - jndi-name: jdbc/celtra-challenge
-      connection-url: jdbc:sqlserver://localhost
-      username: admin
+      connection-url: jdbc:sqlserver://35.242.250.41
+      username: user
       password: 123456789
       max-pool-size: 20
   health:
@@ -29,7 +28,7 @@ kumuluzee:
       period-s: 60
     checks:
       data-source-health-check:
-        jndi-name: jdbc/celtra-prod
+        jndi-name: jdbc/celtra-challenge
       disk-space-health-check:
         threshold: 100000000
   metrics:

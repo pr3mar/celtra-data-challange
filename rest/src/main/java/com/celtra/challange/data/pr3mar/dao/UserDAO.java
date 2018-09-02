@@ -3,6 +3,7 @@ package com.celtra.challange.data.pr3mar.dao;
 import com.celtra.challange.data.pr3mar.models.entity.UserEntity;
 
 import javax.enterprise.context.RequestScoped;
+import javax.persistence.NoResultException;
 import java.util.List;
 
 @RequestScoped
@@ -29,8 +30,12 @@ public class UserDAO extends GenericDAO<UserEntity, Long> {
     }
 
     public Long getLatestId() {
-        return em.createNamedQuery("User.getLastId", Long.class)
-                .setMaxResults(1)
-                .getSingleResult();
+        try {
+            return em.createNamedQuery("User.getLastId", Long.class)
+                    .setMaxResults(1)
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            return -1L;
+        }
     }
 }

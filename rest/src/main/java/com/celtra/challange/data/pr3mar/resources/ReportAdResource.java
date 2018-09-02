@@ -32,7 +32,7 @@ public class ReportAdResource {
 
     @GET
     @Path("/date")
-    @Operation(summary = "Get summary for ads in given time frame", tags = {"Reports"},
+    @Operation(summary = "Get summary for ads in given time frame", tags = {"Reports", "Ad"},
             description = "Get a summary of the ads within the given time frame (default = one week)",
             responses = {
                     @ApiResponse(
@@ -72,7 +72,7 @@ public class ReportAdResource {
 
     @GET
     @Path("/day")
-    @Operation(summary = "Get summary for all ads per day", tags = {"Reports"},
+    @Operation(summary = "Get summary for all ads per day", tags = {"Reports", "Ad"},
             description = "Get a summary of all ads per day in the given time period (default = one week)",
             responses = {
                     @ApiResponse(
@@ -112,7 +112,7 @@ public class ReportAdResource {
 
     @GET
     @Path("/id")
-    @Operation(summary = "Get summary for ads with ids", tags = {"Reports"},
+    @Operation(summary = "Get summary for ads with ids", tags = {"Reports", "Ad"},
             description = "Get a summary of ads with given ids from the system",
             responses = {
                     @ApiResponse(
@@ -151,7 +151,7 @@ public class ReportAdResource {
 
     @GET
     @Path("/id/{id}")
-    @Operation(summary = "Get summary for ad with id", tags = {"Reports"},
+    @Operation(summary = "Get summary for ad with id", tags = {"Reports", "Ad"},
             description = "Get a summary of ad with given id from the system",
             responses = {
                     @ApiResponse(
@@ -190,7 +190,7 @@ public class ReportAdResource {
 
     @GET
     @Path("name/{name}")
-    @Operation(summary = "Get summary for ads by name", tags = {"Reports"},
+    @Operation(summary = "Get summary for ads by name", tags = {"Reports", "Ad"},
             description = "Get a summary of the ad with the provided name from the system",
             responses = {
                     @ApiResponse(
@@ -228,7 +228,7 @@ public class ReportAdResource {
     }
     @GET
     @Path("name/")
-    @Operation(summary = "Get summary for ads by name list", tags = {"Reports"},
+    @Operation(summary = "Get summary for ads by name list", tags = {"Reports", "Ad"},
             description = "Get a summary of the ad with the provided names from the system",
             responses = {
                     @ApiResponse(

@@ -138,5 +138,41 @@ public class CampaignDBService extends GenericDBService<CampaignEntity, Long, Ca
         }
         return summary;
     }
+
+    public List<CampaignSummary> getOngoingCampaignReport()
+            throws EntityNotFoundException {
+        List<CampaignSummary> summary = dao.getReportOngoing();
+        if(summary.isEmpty()) {
+            throw new EntityNotFoundException("Impressions not found.");
+        }
+        return summary;
+    }
+
+    public List<CampaignSummary> getOngoingCampaignReportByDay()
+            throws EntityNotFoundException {
+        List<CampaignSummary> summary = dao.getReportOngoingByDay();
+        if(summary.isEmpty()) {
+            throw new EntityNotFoundException("Impressions not found.");
+        }
+        return summary;
+    }
+
+    public List<CampaignSummary> getFinishedCampaignReport()
+            throws EntityNotFoundException {
+        List<CampaignSummary> summary = dao.getReportFinished();
+        if(summary.isEmpty()) {
+            throw new EntityNotFoundException("Impressions not found.");
+        }
+        return summary;
+    }
+
+    public List<CampaignSummary> getFinishedCampaignReportByDay()
+            throws EntityNotFoundException {
+        List<CampaignSummary> summary = dao.getReportFinishedByDay();
+        if(summary.isEmpty()) {
+            throw new EntityNotFoundException("Impressions not found.");
+        }
+        return summary;
+    }
 }
 

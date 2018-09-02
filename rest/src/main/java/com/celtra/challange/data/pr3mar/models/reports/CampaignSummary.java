@@ -2,6 +2,7 @@ package com.celtra.challange.data.pr3mar.models.reports;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
+import java.util.Date;
 import java.util.List;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -10,6 +11,8 @@ public class CampaignSummary {
     private Long CampaignId;
     private String CampaignName;
     private String weekDay;
+    private Date activeFrom;
+    private Date activeTo;
     private Long impressions;
     private Long uniqueUsers;
     private Long interactions;
@@ -68,6 +71,43 @@ public class CampaignSummary {
         this.adSummaries = adSummaries;
     }
 
+    public CampaignSummary(
+            Long campaignId, String campaignName, String weekDay,
+            Date activeFrom, Date activeTo, Long impressions, Long uniqueUsers,
+            Long interactions, Long swipe, Long touch, Long click, Long pinch
+    ) {
+        CampaignId = campaignId;
+        CampaignName = campaignName;
+        this.weekDay = weekDay;
+        this.activeFrom = activeFrom;
+        this.activeTo = activeTo;
+        this.impressions = impressions;
+        this.uniqueUsers = uniqueUsers;
+        this.interactions = interactions;
+        this.swipe = swipe;
+        this.touch = touch;
+        this.click = click;
+        this.pinch = pinch;
+    }
+
+    public CampaignSummary(
+            Long campaignId, String campaignName, Date activeFrom,
+            Date activeTo, Long impressions, Long uniqueUsers,
+            Long interactions, Long swipe, Long touch, Long click, Long pinch
+    ) {
+        CampaignId = campaignId;
+        CampaignName = campaignName;
+        this.activeFrom = activeFrom;
+        this.activeTo = activeTo;
+        this.impressions = impressions;
+        this.uniqueUsers = uniqueUsers;
+        this.interactions = interactions;
+        this.swipe = swipe;
+        this.touch = touch;
+        this.click = click;
+        this.pinch = pinch;
+    }
+
     public Long getCampaignId() {
         return CampaignId;
     }
@@ -90,6 +130,22 @@ public class CampaignSummary {
 
     public void setWeekDay(String weekDay) {
         this.weekDay = weekDay;
+    }
+
+    public Date getActiveFrom() {
+        return activeFrom;
+    }
+
+    public void setActiveFrom(Date activeFrom) {
+        this.activeFrom = activeFrom;
+    }
+
+    public Date getActiveTo() {
+        return activeTo;
+    }
+
+    public void setActiveTo(Date activeTo) {
+        this.activeTo = activeTo;
     }
 
     public Long getImpressions() {
