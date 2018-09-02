@@ -12,6 +12,7 @@ import com.celtra.challange.data.pr3mar.models.entity.ImpressionEntity;
 import com.celtra.challange.data.pr3mar.models.entity.UserEntity;
 import com.celtra.challange.data.pr3mar.transformers.ImpressionTransformer;
 import com.celtra.challange.data.pr3mar.utils.Pair;
+import com.celtra.challange.data.pr3mar.utils.Utils;
 import com.kumuluz.ee.logs.LogManager;
 import com.kumuluz.ee.logs.Logger;
 import com.kumuluz.ee.logs.enums.LogLevel;
@@ -64,7 +65,7 @@ public class GenerateDataService {
     {
         long startTime = System.nanoTime();
         // validate the dates
-        Pair<Date, Date> dates = getDates(inputFrom, inputTo);
+        Pair<Date, Date> dates = Utils.getDates(inputFrom, inputTo);
         Date dateFrom = dates.getLeft();
         Date dateTo = dates.getRight();
 
@@ -127,7 +128,7 @@ public class GenerateDataService {
         return val;
     }
 
-    private Pair<Date, Date> getDates(Date from, Date to) {
+/*    private Pair<Date, Date> getDates(Date from, Date to) {
         Date dateFrom;
         Date dateTo;
         if(to == null) {
@@ -155,7 +156,7 @@ public class GenerateDataService {
             dateFrom = new Date(dateFrom.getTime() - 24 * 60 * 60 * 1000);
         }
         return new Pair<>(dateFrom, dateTo);
-    }
+    }*/
 
     private void createNewUsers(long amount)
             throws  InternalServerExecption, InvalidEntityException,

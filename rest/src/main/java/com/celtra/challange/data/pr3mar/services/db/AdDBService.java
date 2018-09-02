@@ -7,12 +7,16 @@ import com.celtra.challange.data.pr3mar.exceptions.InvalidEntityException;
 import com.celtra.challange.data.pr3mar.exceptions.InvalidParameterException;
 import com.celtra.challange.data.pr3mar.models.dto.AdDTO;
 import com.celtra.challange.data.pr3mar.models.entity.AdEntity;
+import com.celtra.challange.data.pr3mar.models.reports.AdSummary;
 import com.celtra.challange.data.pr3mar.transformers.AdTransformer;
+import com.celtra.challange.data.pr3mar.utils.Pair;
+import com.celtra.challange.data.pr3mar.utils.Utils;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Transactional
@@ -58,6 +62,60 @@ public class AdDBService extends GenericDBService<AdEntity, Long, AdDTO> {
             created.add(createNew(dto));
         }
         return created;
+    }
+
+    public List<AdSummary> getAdSummaryByDate(Date dateFrom, Date dateTo) throws EntityNotFoundException {
+        Pair<Date, Date> dates = Utils.getDates(dateFrom, dateTo);
+        List<AdSummary> resultList = dao.getAdSummary(dates.getLeft(), dates.getRight());
+        if(resultList.isEmpty()) {
+            throw new EntityNotFoundException("No impressions found.");
+        }
+        return resultList;
+    }
+
+    public List<AdSummary> getAdSummaryByIdList(List<Long> ids) throws EntityNotFoundException {
+        List<AdSummary> resultList = dao.getAdSummaryByIdList(ids);
+        if(resultList.isEmpty()) {
+            throw new EntityNotFoundException("No impressions found.");
+        }
+        return resultList;
+    }
+
+    public List<AdSummary> getAdSummaryByNameList(List<String> names) throws EntityNotFoundException {
+        List<AdSummary> resultList = dao.getAdSummaryByNameList(names);
+        if(resultList.isEmpty()) {
+            throw new EntityNotFoundException("No impressions found.");
+        }
+        return resultList;
+    }
+
+    public AdSummary getAdSummaryByName(String name) throws EntityNotFoundException {
+        List<String> array = new ArrayList<>();
+        array.add(name);
+        List<AdSummary> resultList = dao.getAdSummaryByNameList(array);
+        if(resultList.isEmpty()) {
+            throw new EntityNotFoundException("No impressions found");
+        }
+        return resultList.get(0);
+    }
+
+    public AdSummary getAdSummaryById(Long id) throws EntityNotFoundException {
+        List<Long> array = new ArrayList<>();
+        array.add(id);
+        List<AdSummary> resultList = dao.getAdSummaryByIdList(array);
+        if(resultList.isEmpty()) {
+            throw  new EntityNotFoundException("No impressions found.");
+        }
+        return resultList.get(0);
+    }
+
+    public List<AdSummary> getAdSummaryByDay(Date dateFrom, Date dateTo) throws EntityNotFoundException {
+        Pair<Date, Date> dates = Utils.getDates(dateFrom, dateTo);
+        List<AdSummary> resultList = dao.getReportByDay(dates.getLeft(), dates.getRight());
+        if(resultList.isEmpty()) {
+            throw  new EntityNotFoundException("No impressions found.");
+        }
+        return resultList;
     }
 }
 

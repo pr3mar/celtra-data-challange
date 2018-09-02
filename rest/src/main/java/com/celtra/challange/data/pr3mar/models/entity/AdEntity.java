@@ -1,5 +1,7 @@
 package com.celtra.challange.data.pr3mar.models.entity;
 
+import com.celtra.challange.data.pr3mar.models.reports.AdSummary;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -24,6 +26,47 @@ import static javax.persistence.GenerationType.IDENTITY;
         @NamedQuery(
                 name = "Ad.getLastId",
                 query = "SELECT c.id FROM Ad c ORDER BY c.dateStored DESC "
+        )
+})
+@SqlResultSetMappings({
+        @SqlResultSetMapping(
+                name = "AdSummary",
+                classes = {
+                        @ConstructorResult(
+                                targetClass = AdSummary.class,
+                                columns = {
+                                        @ColumnResult(name = "AdId", type = Long.class),
+                                        @ColumnResult(name = "AdName", type = String.class),
+                                        @ColumnResult(name = "impressions", type = Long.class),
+                                        @ColumnResult(name = "uniqueUsers", type = Long.class),
+                                        @ColumnResult(name = "interactions", type = Long.class),
+                                        @ColumnResult(name = "swipe", type = Long.class),
+                                        @ColumnResult(name = "touch", type = Long.class),
+                                        @ColumnResult(name = "click", type = Long.class),
+                                        @ColumnResult(name = "pinch", type = Long.class),
+                                }
+                        )
+                }
+        ),
+        @SqlResultSetMapping(
+                name = "AdSummaryDay",
+                classes = {
+                        @ConstructorResult(
+                                targetClass = AdSummary.class,
+                                columns = {
+                                        @ColumnResult(name = "AdId", type = Long.class),
+                                        @ColumnResult(name = "AdName", type = String.class),
+                                        @ColumnResult(name = "weekDay", type = String.class),
+                                        @ColumnResult(name = "impressions", type = Long.class),
+                                        @ColumnResult(name = "uniqueUsers", type = Long.class),
+                                        @ColumnResult(name = "interactions", type = Long.class),
+                                        @ColumnResult(name = "swipe", type = Long.class),
+                                        @ColumnResult(name = "touch", type = Long.class),
+                                        @ColumnResult(name = "click", type = Long.class),
+                                        @ColumnResult(name = "pinch", type = Long.class),
+                                }
+                        )
+                }
         )
 })
 public class AdEntity implements Serializable {

@@ -1,5 +1,7 @@
 package com.celtra.challange.data.pr3mar.models.entity;
 
+import com.celtra.challange.data.pr3mar.models.reports.CampaignSummary;
+
 import javax.persistence.*;
 
 import java.io.Serializable;
@@ -26,6 +28,47 @@ import static javax.persistence.GenerationType.IDENTITY;
                 name = "Campaign.getLastId",
                 query = "SELECT c.id FROM Campaign c ORDER BY c.dateStored DESC "
         )
+})
+@SqlResultSetMappings({
+    @SqlResultSetMapping(
+            name = "CampaignSummary",
+            classes = {
+                    @ConstructorResult(
+                            targetClass = CampaignSummary.class,
+                            columns = {
+                                    @ColumnResult(name = "CampaignId", type = Long.class),
+                                    @ColumnResult(name = "CampaignName", type = String.class),
+                                    @ColumnResult(name = "impressions", type = Long.class),
+                                    @ColumnResult(name = "uniqueUsers", type = Long.class),
+                                    @ColumnResult(name = "interactions", type = Long.class),
+                                    @ColumnResult(name = "swipe", type = Long.class),
+                                    @ColumnResult(name = "touch", type = Long.class),
+                                    @ColumnResult(name = "click", type = Long.class),
+                                    @ColumnResult(name = "pinch", type = Long.class)
+                            }
+                    )
+            }
+    ),
+    @SqlResultSetMapping(
+            name = "CampaignSummaryDay",
+            classes = {
+                    @ConstructorResult(
+                            targetClass = CampaignSummary.class,
+                            columns = {
+                                    @ColumnResult(name = "CampaignId", type = Long.class),
+                                    @ColumnResult(name = "CampaignName", type = String.class),
+                                    @ColumnResult(name = "weekDay", type = String.class),
+                                    @ColumnResult(name = "impressions", type = Long.class),
+                                    @ColumnResult(name = "uniqueUsers", type = Long.class),
+                                    @ColumnResult(name = "interactions", type = Long.class),
+                                    @ColumnResult(name = "swipe", type = Long.class),
+                                    @ColumnResult(name = "touch", type = Long.class),
+                                    @ColumnResult(name = "click", type = Long.class),
+                                    @ColumnResult(name = "pinch", type = Long.class)
+                            }
+                    )
+            }
+    )
 })
 public class CampaignEntity implements Serializable {
 

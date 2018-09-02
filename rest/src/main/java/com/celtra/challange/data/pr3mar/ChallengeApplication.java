@@ -26,7 +26,8 @@ public class ChallengeApplication extends Application {
         classes.add(ImpressionDataResource.class);
         classes.add(InteractionTypeDataResource.class);
         classes.add(UserDataResource.class);
-        classes.add(ReportResource.class);
+        classes.add(ReportCampaignResource.class);
+        classes.add(ReportAdResource.class);
         classes.add(GenerateDataResource.class);
         return classes;
     }
