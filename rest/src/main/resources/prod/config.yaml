@@ -5,6 +5,7 @@ kumuluzee:
   cors-filter:
     servlet:
       allow-origin: "*"
+      supported-methods: "GET, POST, HEAD, OPTIONS, DELETE, PUT"
   openapi:
     ui:
       enabled: true
@@ -37,7 +38,7 @@ kumuluzee:
       mapping: /metrics
     web-instrumentation:
       - name: dataResource
-        url-pattern: /v1/device/*
+        url-pattern: /v1/*
   logs:
     config-file: '<?xml version="1.0" encoding="UTF-8"?>
                   <Configuration name="celtra-prod">
